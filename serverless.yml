@@ -5,6 +5,7 @@ configValidationMode: off
 provider:
   name: aws
   runtime: nodejs18.x
+  stage: default
 
 package:
   exclude:
