@@ -1,0 +1,28 @@
+service: nasa-api-image-notification
+frameworkVersion: '3'
+configValidationMode: off
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+package:
+  exclude:
+    - secrets.yml
+
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  secrets: ${file(secrets.yml):${self:custom.stage}}
+
+functions:
+  notification:
+    handler: index.handler
+    events:
+      - scheedule: cron(0 18 * * ? *)
+    environment:
+      NASA_API_KEY: "${self:custom.secrets.NASA_API_KEY}"
+      ALERTY_API_KEY: "${self:custom.secrets.ALERTY_API_KEY}"
+      TWILIO_ACCOUNT_SID: "${self:custom.secrets.TWILIO_ACCOUNT_SID}"
+      TWILIO_AUTH_TOKEN: "${self:custom.secrets.TWILIO_AUTH_TOKEN}"
+      TWILIO_FROM_NUMBER: "${self:custom.secrets.TWILIO_FROM_NUMBER}"
+      TWILIO_TO_NUMBER: "${self:custom.secrets.TWILIO_TO_NUMBER}"
