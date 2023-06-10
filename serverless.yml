@@ -19,7 +19,7 @@ functions:
   notification:
     handler: index.handler
     events:
-      - scheedule: cron(0 18 * * ? *)
+      - scheedule: cron(0 16 * * ? *)
     environment:
       NASA_API_KEY: "${self:custom.secrets.NASA_API_KEY}"
       ALERTY_API_KEY: "${self:custom.secrets.ALERTY_API_KEY}"
