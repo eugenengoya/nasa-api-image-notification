@@ -8,7 +8,7 @@ provider:
   stage: default
 
 package:
-  exclude:
+  patterns:
     - secrets.yml
 
 custom:
